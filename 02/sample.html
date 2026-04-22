@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>p5play</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.4/lib/p5.min.js"></script>
+    <script src="https://p5play.org/v3/planck.min.js"></script>
+    <script src="https://p5play.org/v3/p5play.min.js"></script>
+    <script defer>
+      let x = 50;
+      let y = 350;
+      let body, cabin, wheel1, wheel2;
+
+      function setup() {
+        new Canvas(640, 480);
+
+        // 【追加】重力と床を追加
+        world.gravity.y = 10;
+        new Sprite(320, 450, 640, 20, 'static');
+
+        // 'kinematic'（物理演算の影響を受けない設定）を追加
+        body = new Sprite(x, y, 120, 40, 'kinematic');
+        body.color = '#0000ff';
+        cabin = new Sprite(x, y - 30, 60, 30, 'kinematic');
+        cabin.color = '#00ffff';
+        wheel1 = new Sprite(x - 40, y + 20, 25, 'kinematic');
+        wheel1.color = '#000000';
+        wheel2 = new Sprite(x + 40, y + 20, 25, 'kinematic');
+        wheel2.color = '#000000';
+
+        // 【追加】障害物（ブロックの壁）を置く
+        new Sprite(400, 420, 40, 40);
+        new Sprite(400, 380, 40, 40);
+        new Sprite(400, 340, 40, 40);
+        new Sprite(400, 300, 40, 40);
+      }
+
+      function draw() {
+        background('#dddddd');
+
+        x = x + 2;
+
+        body.x = x;
+        cabin.x = x;
+        wheel1.x = x - 40;
+        wheel2.x = x + 40;
+      }
+    </script>
+
+    <style>
+      canvas {
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>

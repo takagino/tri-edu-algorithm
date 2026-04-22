@@ -1,38 +1,38 @@
-let px = 50;
-let py = 350;
-let body, eye; // パーツごとに箱を用意
+let x = 0;
+let y = 400;
+let body, cabin, wheel1, wheel2;
 
 function setup() {
   new Canvas(640, 480);
+
+  // 【追加】重力と床を追加
   world.gravity.y = 10;
   new Sprite(320, 450, 640, 20, 'static');
 
-  // パーツ1：体（基準となる px, py をそのまま使う）
-  body = new Sprite(px, py, 80, 50);
-  body.color = 'pink';
-  body.collider = 'kinematic';
+  // 'kinematic'（物理演算の影響を受けない設定）を追加
+  body = new Sprite(x, y, 120, 40, 'kinematic');
+  body.color = '#0000ff';
+  cabin = new Sprite(x, y - 30, 60, 30, 'kinematic');
+  cabin.color = '#00ffff';
+  wheel1 = new Sprite(x - 40, y + 20, 25, 'kinematic');
+  wheel1.color = '#000000';
+  wheel2 = new Sprite(x + 40, y + 20, 25, 'kinematic');
+  wheel2.color = '#000000';
 
-  // パーツ2：目（体から見て、右に+20、上に-10 ずらす）
-  eye = new Sprite(px + 20, py - 10, 15, 15);
-  eye.color = 'white';
-  eye.collider = 'kinematic';
-
-  // 障害物の壁
-  new Sprite(400, 400, 40, 40);
-  new Sprite(400, 360, 40, 40);
-  new Sprite(400, 320, 40, 40);
+  // 【追加】障害物（ブロックの壁）を置く
+  new Sprite(400, 420, 40, 40);
+  new Sprite(400, 380, 40, 40);
+  new Sprite(400, 340, 40, 40);
+  new Sprite(400, 300, 40, 40);
 }
 
 function draw() {
-  background('skyblue');
+  background('#dddddd');
 
-  // 大元の変数「px」を増やす
-  px = px + 2;
+  x = x + 2;
 
-  // 1つの変数 px を変えるだけで、全パーツが一緒に動く！（連動の魔法）
-  body.x = px;
-  eye.x = px + 20; // setupと同じ「+20」のずらし幅をキープする
-
-  body.y = py;
-  eye.y = py - 10; // setupと同じ「-10」のずらし幅をキープする
+  body.x = x;
+  cabin.x = x;
+  wheel1.x = x - 40;
+  wheel2.x = x + 40;
 }
