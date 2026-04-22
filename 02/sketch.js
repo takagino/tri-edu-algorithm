@@ -6,7 +6,7 @@ function setup() {
   new Canvas(640, 480);
 
   // 【追加】重力と床を追加
-  world.gravity.y = 1;
+  world.gravity.y = 10;
   new Sprite(320, 450, 640, 20, 'static');
 
   // 'kinematic'（物理演算の影響を受けない設定）を追加
